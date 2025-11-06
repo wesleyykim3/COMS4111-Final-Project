@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}{% if medication %}Edit{% else %}New{% endif %} Medication{% endblock %}
+
+{% block content %}
+<div class="px-4 sm:px-6 lg:px-8 max-w-2xl mx-auto">
+    <h1 class="text-3xl font-semibold text-gray-900 mb-8">{% if medication %}Edit{% else %}New{% endif %} Medication</h1>
+    
+    <form action="{% if medication %}/medications/{{ medication.id }}/update{% else %}/medications/create{% endif %}" method="POST" class="space-y-6">
+        <div>
+            <label for="generic_name" class="block text-sm font-medium text-gray-700">Generic Name <span class="text-red-500">*</span></label>
+            <input type="text" name="generic_name" id="generic_name" required value="{% if medication %}{{ medication.generic_name }}{% endif %}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+        </div>
+        
+        <div>
+            <label for="milligrams" class="block text-sm font-medium text-gray-700">Milligrams <span class="text-gray-400">(optional)</span></label>
+            <input type="number" name="milligrams" id="milligrams" value="{% if medication %}{{ medication.milligrams }}{% endif %}" placeholder="e.g., 200" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+        </div>
+        
+        <div>
+            <label for="route" class="block text-sm font-medium text-gray-700">Route <span class="text-gray-400">(optional)</span></label>
+            <input type="text" name="route" id="route" value="{% if medication %}{{ medication.route }}{% endif %}" placeholder="e.g., oral, nasal" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+        </div>
+        
+        <div class="flex justify-end space-x-3">
+            <a href="/medications" class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</a>
+            <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">Save</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

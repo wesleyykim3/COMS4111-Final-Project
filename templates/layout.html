@@ -13,12 +13,30 @@
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="/episodes" class="text-2xl font-bold text-indigo-600">Episode Tracker</a>
+                        <a href="/" class="text-2xl font-bold text-indigo-600">Migraine Tracker</a>
                     </div>
                     <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="/episodes" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="/" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Home
+                        </a>
+                        <a href="/episodes" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Episodes
                         </a>
+                        <a href="/episodes/new" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            New Episode
+                        </a>
+                        <div class="relative inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 group">
+                            <span class="cursor-pointer">Manage Data ▾</span>
+                            <div class="absolute left-0 top-full mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block z-10">
+                                <div class="py-1">
+                                    <a href="/medications" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Medications</a>
+                                    <a href="/symptoms" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Symptoms</a>
+                                    <a href="/triggers" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Triggers</a>
+                                    <a href="/pain_locations" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pain Locations</a>
+                                    <a href="/attack_types" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Attack Types</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,7 +52,7 @@
     <footer class="bg-white mt-12">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <p class="text-center text-gray-500 text-sm">
-                Episode Tracker - COMS 4111 Project
+                Migraine Tracker - COMS 4111 Project
             </p>
         </div>
     </footer>

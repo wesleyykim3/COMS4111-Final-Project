@@ -67,6 +67,95 @@
                 </div>
             </div>
 
+            <!-- Attack Type -->
+            <div>
+                <label for="attack_type_id" class="block text-sm font-medium text-gray-700">
+                    Attack Type <span class="text-gray-400">(optional)</span>
+                </label>
+                <select name="attack_type_id" 
+                        id="attack_type_id"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+                    <option value="">-- Select Attack Type --</option>
+                    {% for attack_type in attack_types %}
+                    <option value="{{ attack_type.id }}" {% if episode and episode.attack_type_id == attack_type.id %}selected{% endif %}>
+                        {{ attack_type.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Pain Locations (Multi-select) -->
+            <div>
+                <label for="pain_locations" class="block text-sm font-medium text-gray-700">
+                    Pain Locations <span class="text-gray-400">(hold Ctrl/Cmd to select multiple)</span>
+                </label>
+                <select name="pain_locations" 
+                        id="pain_locations"
+                        multiple
+                        size="5"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+                    {% for location in pain_locations %}
+                    <option value="{{ location.id }}" {% if location.id in selected_pain_locations %}selected{% endif %}>
+                        {{ location.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Symptoms (Multi-select) -->
+            <div>
+                <label for="symptoms" class="block text-sm font-medium text-gray-700">
+                    Symptoms <span class="text-gray-400">(hold Ctrl/Cmd to select multiple)</span>
+                </label>
+                <select name="symptoms" 
+                        id="symptoms"
+                        multiple
+                        size="5"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+                    {% for symptom in symptoms %}
+                    <option value="{{ symptom.id }}" {% if symptom.id in selected_symptoms %}selected{% endif %}>
+                        {{ symptom.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Triggers (Multi-select) -->
+            <div>
+                <label for="triggers" class="block text-sm font-medium text-gray-700">
+                    Triggers <span class="text-gray-400">(hold Ctrl/Cmd to select multiple)</span>
+                </label>
+                <select name="triggers" 
+                        id="triggers"
+                        multiple
+                        size="5"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+                    {% for trigger in triggers %}
+                    <option value="{{ trigger.id }}" {% if trigger.id in selected_triggers %}selected{% endif %}>
+                        {{ trigger.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Medications (Multi-select) -->
+            <div>
+                <label for="medications" class="block text-sm font-medium text-gray-700">
+                    Medications Taken <span class="text-gray-400">(hold Ctrl/Cmd to select multiple)</span>
+                </label>
+                <select name="medications" 
+                        id="medications"
+                        multiple
+                        size="5"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+                    {% for medication in medications %}
+                    <option value="{{ medication.id }}" {% if medication.id in selected_medications %}selected{% endif %}>
+                        {{ medication.generic_name }}{% if medication.milligrams %} ({{ medication.milligrams }}mg){% endif %}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
             <!-- Had Menses Checkbox -->
             <div class="flex items-center">
                 <input type="checkbox" 

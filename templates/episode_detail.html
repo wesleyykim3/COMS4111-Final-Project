@@ -75,6 +75,92 @@
                     </dd>
                 </div>
 
+                <!-- Attack Type -->
+                <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-gray-500">Attack Type</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        {% if attack_type %}
+                            <span class="inline-flex rounded-full bg-indigo-100 px-3 py-1 text-sm font-semibold text-indigo-800">
+                                {{ attack_type }}
+                            </span>
+                        {% else %}
+                            <span class="text-gray-400 italic">Not specified</span>
+                        {% endif %}
+                    </dd>
+                </div>
+
+                <!-- Pain Locations -->
+                <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-gray-500">Pain Locations</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        {% if pain_locations %}
+                            <div class="flex flex-wrap gap-2">
+                                {% for location in pain_locations %}
+                                <span class="inline-flex rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-800">
+                                    {{ location }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <span class="text-gray-400 italic">None recorded</span>
+                        {% endif %}
+                    </dd>
+                </div>
+
+                <!-- Symptoms -->
+                <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-gray-500">Symptoms</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        {% if symptoms %}
+                            <div class="flex flex-wrap gap-2">
+                                {% for symptom in symptoms %}
+                                <span class="inline-flex rounded-full bg-purple-100 px-3 py-1 text-sm font-semibold text-purple-800">
+                                    {{ symptom }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <span class="text-gray-400 italic">None recorded</span>
+                        {% endif %}
+                    </dd>
+                </div>
+
+                <!-- Triggers -->
+                <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-gray-500">Triggers</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        {% if triggers %}
+                            <div class="flex flex-wrap gap-2">
+                                {% for trigger in triggers %}
+                                <span class="inline-flex rounded-full bg-orange-100 px-3 py-1 text-sm font-semibold text-orange-800">
+                                    {{ trigger }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <span class="text-gray-400 italic">None identified</span>
+                        {% endif %}
+                    </dd>
+                </div>
+
+                <!-- Medications -->
+                <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-gray-500">Medications Taken</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        {% if medications %}
+                            <div class="flex flex-wrap gap-2">
+                                {% for medication in medications %}
+                                <span class="inline-flex rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-800">
+                                    {{ medication }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <span class="text-gray-400 italic">None recorded</span>
+                        {% endif %}
+                    </dd>
+                </div>
+
                 <!-- Had Menses -->
                 <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
                     <dt class="text-sm font-medium text-gray-500">Had Menses</dt>

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Attack Types - Migraine Tracker{% endblock %}
+{% block content %}
+<div class="px-4 sm:px-6 lg:px-8">
+    <div class="sm:flex sm:items-center">
+        <div class="sm:flex-auto">
+            <h1 class="text-3xl font-semibold text-gray-900">Attack Types</h1>
+            <p class="mt-2 text-sm text-gray-700">Manage attack type entries</p>
+        </div>
+        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+            <a href="/attack_types/new" class="inline-flex items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">Add Attack Type</a>
+        </div>
+    </div>
+    <div class="mt-8 flow-root">
+        <table class="min-w-full divide-y divide-gray-300">
+            <thead><tr><th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Name</th><th class="relative py-3.5 pl-3 pr-4 sm:pr-0"><span class="sr-only">Actions</span></th></tr></thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+                {% for item in attack_types %}
+                <tr><td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">{{ item[1] }}</td><td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"><a href="/attack_types/{{ item[0] }}/edit" class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</a><form action="/attack_types/{{ item[0] }}/delete" method="POST" class="inline" onsubmit="return confirm('Delete?');"><button type="submit" class="text-red-600 hover:text-red-900">Delete</button></form></td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
