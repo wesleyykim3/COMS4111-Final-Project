@@ -1,0 +1,129 @@
+{% extends "layout.html" %}
+
+{% block title %}{% if episode %}Edit Episode{% else %}New Episode{% endif %} - Episode Tracker{% endblock %}
+
+{% block content %}
+<div class="px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto">
+        <div class="mb-8">
+            <h1 class="text-3xl font-semibold text-gray-900">
+                {% if episode %}Edit Episode{% else %}New Episode{% endif %}
+            </h1>
+            <p class="mt-2 text-sm text-gray-700">
+                {% if episode %}Update the details of this episode.{% else %}Record a new migraine/headache episode.{% endif %}
+            </p>
+        </div>
+
+        <form action="{% if episode %}/episodes/{{ episode.id }}/update{% else %}/episodes/create{% endif %}" method="POST" class="space-y-6 bg-white shadow-sm rounded-lg p-6">
+            
+            <!-- Start DateTime -->
+            <div>
+                <label for="start_datetime" class="block text-sm font-medium text-gray-700">
+                    Start Date & Time <span class="text-red-500">*</span>
+                </label>
+                <input type="datetime-local" 
+                       name="start_datetime" 
+                       id="start_datetime" 
+                       required
+                       value="{% if episode and episode.start_time %}{{ episode.start_time.strftime('%Y-%m-%dT%H:%M') }}{% endif %}"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+            </div>
+
+            <!-- End DateTime -->
+            <div>
+                <label for="end_datetime" class="block text-sm font-medium text-gray-700">
+                    End Date & Time <span class="text-gray-400">(optional)</span>
+                </label>
+                <input type="datetime-local" 
+                       name="end_datetime" 
+                       id="end_datetime"
+                       value="{% if episode and episode.end_time %}{{ episode.end_time.strftime('%Y-%m-%dT%H:%M') }}{% endif %}"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+            </div>
+
+            <!-- Intensity -->
+            <div>
+                <label for="intensity" class="block text-sm font-medium text-gray-700">
+                    Intensity (1-10) <span class="text-red-500">*</span>
+                </label>
+                <div class="mt-1 flex items-center space-x-4">
+                    <input type="range" 
+                           name="intensity" 
+                           id="intensity" 
+                           min="1" 
+                           max="10" 
+                           value="{% if episode %}{{ episode.intensity }}{% else %}5{% endif %}"
+                           required
+                           oninput="document.getElementById('intensity-value').textContent = this.value"
+                           class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    <span id="intensity-value" class="text-lg font-semibold text-indigo-600 min-w-[3rem] text-center">
+                        {% if episode %}{{ episode.intensity }}{% else %}5{% endif %}
+                    </span>
+                </div>
+                <div class="mt-2 flex justify-between text-xs text-gray-500">
+                    <span>Mild</span>
+                    <span>Moderate</span>
+                    <span>Severe</span>
+                </div>
+            </div>
+
+            <!-- Had Menses Checkbox -->
+            <div class="flex items-center">
+                <input type="checkbox" 
+                       name="had_menses" 
+                       id="had_menses"
+                       {% if episode and episode.had_menses %}checked{% endif %}
+                       class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                <label for="had_menses" class="ml-2 block text-sm text-gray-900">
+                    Had menses during episode
+                </label>
+            </div>
+
+            <!-- Notes -->
+            <div>
+                <label for="notes" class="block text-sm font-medium text-gray-700">
+                    Notes <span class="text-gray-400">(optional)</span>
+                </label>
+                <textarea name="notes" 
+                          id="notes" 
+                          rows="4"
+                          placeholder="Describe symptoms, triggers, medications taken, etc."
+                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">{% if episode %}{{ episode.notes }}{% endif %}</textarea>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex items-center justify-end space-x-4 pt-4 border-t">
+                <a href="/episodes" class="px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Cancel
+                </a>
+                <button type="submit" class="px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    {% if episode %}Update Episode{% else %}Create Episode{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+// Validate that end time is after start time
+document.getElementById('end_datetime').addEventListener('change', function() {
+    const startTime = document.getElementById('start_datetime').value;
+    const endTime = this.value;
+    
+    if (startTime && endTime && endTime < startTime) {
+        alert('End time must be after start time!');
+        this.value = '';
+    }
+});
+
+document.getElementById('start_datetime').addEventListener('change', function() {
+    const startTime = this.value;
+    const endTime = document.getElementById('end_datetime').value;
+    
+    if (startTime && endTime && endTime < startTime) {
+        alert('End time must be after start time!');
+        document.getElementById('end_datetime').value = '';
+    }
+});
+</script>
+{% endblock %}
