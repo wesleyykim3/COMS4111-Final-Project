@@ -12,41 +12,57 @@ This is the same database that we used for Part 2. Please check this database fo
 ## Application URL
 **http://34.75.108.30:8111**
 
-Note: Our VM will remain running to ensure this URL continues to work for evaluation.
 
 ## Implementation Status
 
-### Features from Part 1 Proposal
+### Core Features Implemented
 
-All proposed features from Part 1 have been fully implemented:
+**1. Episode Management (Fully Implemented)**
+- Complete CRUD operations for migraine episodes
+- Episodes track: start time, end time, intensity (1-10 scale), attack type, menstrual cycle correlation, and notes
+- List view with detailed episode pages
+- Form-based creation and editing with validation
 
-**1. Episode Management**
-- Users can create, view, edit, and delete migraine episodes
-- Episodes track start time, end time, intensity (1-10 scale), notes, and menstrual cycle correlation
-- Implemented as proposed with full CRUD functionality
-
-**2. Multi-Relationship Tracking**
+**2. Multi-Relationship Tracking (Fully Implemented)**
 - Episodes can be associated with multiple medications, symptoms, triggers, and pain locations
-- Users select from existing reference data when creating/editing episodes
-- All many-to-many relationships properly managed through junction tables
-- Implemented exactly as proposed
+- Multi-select interface allows users to choose from existing reference data
+- All many-to-many relationships properly managed through junction tables (`episode_pain_locations`, `episode_symptoms`, `episode_triggers`, `episode_medications`)
+- Relationships displayed with color-coded badges on detail pages
 
-**3. Reference Data Management**
-- Complete CRUD operations for medications, symptoms, triggers, pain locations, and attack types
-- Users can add custom entries to track their specific experiences
-- Implemented as proposed with dedicated management pages for each entity type
+**3. Reference Data Management (Fully Implemented)**
+- Complete CRUD operations for all reference entities:
+  - Medications (generic name, dosage in milligrams, route)
+  - Symptoms
+  - Triggers
+  - Pain locations
+  - Attack types
+- Users can add, edit, and delete custom entries
+- Dedicated management pages accessible via dropdown navigation menu
 
-**4. Statistics Dashboard**
-- Home page displays key metrics: total episodes, episodes this month, and average intensity
-- Provides quick overview of episode patterns
-- Implemented as proposed with real-time database queries
+**4. Basic Statistics Dashboard (Implemented)**
+- Home page displays three key metrics:
+  - Total episodes count
+  - Episodes this month
+  - Average pain intensity
+- Real-time database queries using PostgreSQL aggregation functions
 
-**5. User Interface**
-- Modern, responsive design using Tailwind CSS
-- Intuitive navigation with dropdown menus
-- Color-coded visual indicators for different data types
-- Exceeded original proposal with enhanced UX features
+**5. User Interface (Implemented)**
+- Clean, modern design using Tailwind CSS
+- Responsive layout works on desktop and mobile
+- Intuitive navigation with header links and dropdown menus
+- Color-coded badges for different data types (medications in blue, symptoms in red, triggers in yellow, pain locations in green)
 
+### Features Simplified or Deferred
+
+The following features from the original proposal were simplified or deferred to future development:
+
+1. **User Registration System**: The application currently uses a default user (user_id = 1) rather than implementing full user authentication and registration with demographic details.
+
+2. **Calendar Interface**: Episodes are displayed in a list view sorted by date rather than a visual calendar interface.
+
+3. **Advanced Dashboard Analytics**: The dashboard shows basic statistics rather than the full range of proposed analytics (monthly migraine days vs. headache days, min/max severity, medication usage days, visual charts/graphs).
+
+4. **Medication Trade Names**: Only generic medication names are tracked. The `medications_trade` table from the original schema was not implemented.
 
 ---
 
